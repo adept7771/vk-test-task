@@ -1,7 +1,10 @@
 package steps;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.BeforeAll;
+import org.testng.ITestContext;
+import org.testng.ITestNGListener;
+import org.testng.annotations.BeforeTest;
 import pagesAndElements.LeftMenuGlobal;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -14,11 +17,6 @@ public class CommonSteps {
 
     public void openMessenger(){
         leftMenuGlobal.messengerButton.shouldBe(visible).click();
-    }
-
-    //TODO
-    public void checkTestDataIsExists(){
-
     }
 
     LeftMenuGlobal leftMenuGlobal = new LeftMenuGlobal();

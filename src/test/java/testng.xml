@@ -1,48 +1,52 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
+<!-- ATTENTION: -->
+<!-- Attach file types and sources specified in MessageAttachType/Source Enums -->
 <suite name = "Suite1">
-    <test name = "test1 Attach Picture From Vk Collection">
-        <parameter name = "attachType" value="picture"/>
-        <parameter name = "attachSource" value="vk"/>
-        <parameter name = "attachFileName" value="test"/>
+    <listeners>
+        <listener class-name="core.Configurator" />
+    </listeners>
+    <test name = "test1 Attach PICTURE From VK Collection">
+        <parameter name = "attachType" value="PICTURE"/>
+        <parameter name = "attachSource" value="VK"/>
+        <parameter name = "attachFileNameOrDescription" value="test"/><!-- см реализацию-->
         <classes>
             <class name = "tests.AttachTest" />
         </classes>
     </test>
 <!--    <test name = "test2">-->
-<!--        <parameter name = "attachType" value="picture"/>-->
-<!--        <parameter name = "attachSource" value="local"/>-->
+<!--        <parameter name = "attachType" value="PICTURE"/>-->
+<!--        <parameter name = "attachSource" value="LOCAL"/>-->
 <!--        <classes>-->
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name = "test3">-->
-<!--        <parameter name = "attachType" value="audio"/>-->
-<!--        <parameter name = "attachSource" value="vk"/>-->
-<!--        <parameter name = "attachFileName" value="test"/>-->
-<!--        <classes>-->
-<!--            <class name = "tests.AttachTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name = "test1 Attach AUDIO From VK Collection">
+        <parameter name = "attachType" value="AUDIO"/>
+        <parameter name = "attachSource" value="VK"/>
+        <parameter name = "attachFileNameOrDescription" value="test"/>
+        <classes>
+            <class name = "tests.AttachTest" />
+        </classes>
+    </test>
 <!--    <test name = "test4">-->
-<!--        <parameter name = "attachType" value="audio"/>-->
-<!--        <parameter name = "attachSource" value="local"/>-->
+<!--        <parameter name = "attachType" value="AUDIO"/>-->
+<!--        <parameter name = "attachSource" value="LOCAL"/>-->
 <!--        <classes>-->
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
 <!--    <test name = "test5">-->
-<!--        <parameter name = "attachType" value="video"/>-->
-<!--        <parameter name = "attachSource" value="vk"/>-->
-<!--        <parameter name = "attachFileName" value="test"/>-->
+<!--        <parameter name = "attachType" value="VIDEO"/>-->
+<!--        <parameter name = "attachSource" value="VK"/>-->
+<!--        <parameter name = "attachFileNameOrDescription" value="test"/>-->
 <!--        <classes>-->
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
 <!--    <test name = "test6">-->
-<!--        <parameter name = "attachType" value="video"/>-->
-<!--        <parameter name = "attachSource" value="local"/>-->
+<!--        <parameter name = "attachType" value="VIDEO"/>-->
+<!--        <parameter name = "attachSource" value="LOCAL"/>-->
 <!--        <classes>-->
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->

@@ -3,21 +3,38 @@ package core;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.ISuite;
+import org.testng.ISuiteListener;
+import org.testng.ITestContext;
+import org.testng.ITestNGListener;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import testData.DataChecker;
+
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
-public class Configurator {
+public class Configurator implements ITestNGListener {
 
     private static final Logger log = LogManager.getLogger(Configurator.class);
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeSuite
+    public void setUp(ITestContext iTestContext) {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true)
                 .savePageSource(true));
+        DataChecker dataChecker = new DataChecker();
+        dataChecker.checkAttachmentsInVkIsExist(iTestContext);
 //        recognizeFrameworkSettings();
     }
+
+//    @BeforeSuite
+//    private void checkTestDataExist(ITestContext iTestContext){
+//        System.out.println(iTestContext);
+//        DataChecker dataChecker = new DataChecker();
+//        dataChecker.checkAttachmentsInVkIsExist(iTestContext);
+//        System.out.println("123");
+//    }
 
     @AfterClass
     public void tearDown() {
@@ -25,6 +42,10 @@ public class Configurator {
 //        attachPageSource();
 //        attachAsText("Browser console logs", getConsoleLogs());
         closeWebDriver();
+    }
+
+    private void checkAttachmentsInVkIsExist(ITestContext iTestContext){
+
     }
 
     /**

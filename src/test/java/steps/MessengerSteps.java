@@ -7,10 +7,10 @@ import com.codeborne.selenide.ex.ElementShould;
 import common.Tools;
 import org.testng.Assert;
 import pagesAndElements.MessengerPage;
+import testData.additionalClasses.MessageAttachSource;
+import testData.additionalClasses.MessageAttachType;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 import static com.codeborne.selenide.Condition.visible;
 
@@ -57,49 +57,59 @@ public class MessengerSteps {
                 .shouldBe(Condition.exactText(chatName));
     }
 
-    public void assertFileExistInChat(String attachType, String fileName) {
-        // по-хорошему и для полноты проверки надо бы выкачать еще аудио и видео файл, и сравнить
-        // размеры с размерами тех файлов, что лежат в библиотеке VK
-        if (attachType.equals("audio")) {
+    public void assertFileExistInChat(MessageAttachType attachType, String fileNameOrDescription) {
+        // по-хорошему и для полноты проверки надо бы выкачать еще файл, и сравнить
+        // размеры с размерами тех файлов, что лежат в библиотеке VK пока проверка не полная (по верстке)
+        if (attachType.equals(MessageAttachType.AUDIO)) {
+            messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
             SelenideElement audioFileInChatElement = Tools.replaceTextInLocator(
                             messengerPage.attachedAudioFileInChatAbstract,
-                            "TO_REPLACE", fileName)
-                    .shouldBe(visible);
+                            "TO_REPLACE", fileNameOrDescription).shouldBe(visible);
+            // Понимаю, что тут тест свалится если элемент не видим, однако правило АТ гласит что каждый тест
+            // должен заканчиваться Ассертом. Так что он тут есть, но достаточно условный.
             Assert.assertTrue(audioFileInChatElement.isDisplayed());
             return;
         }
-        if (attachType.equals("video")) {
+        if (attachType.equals(MessageAttachType.VIDEO)) {
+            messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
             SelenideElement audioFileInChatElement = Tools.replaceTextInLocator(
                             messengerPage.attachedVideoFileInChatAbstract,
-                            "TO_REPLACE", fileName)
-                    .shouldBe(visible);
+                            "TO_REPLACE", fileNameOrDescription).shouldBe(visible);
             Assert.assertTrue(audioFileInChatElement.isDisplayed());
             return;
+        }
+        if (attachType.equals(MessageAttachType.PICTURE)) {
+            messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
+            SelenideElement pictureFileInChatElement = Tools.replaceTextInLocator(
+                    messengerPage.attachedPictureFileInChatAbstract,
+                    "TO_REPLACE", fileNameOrDescription).shouldBe(visible);
+            Assert.assertTrue(pictureFileInChatElement.isDisplayed());
         }
     }
 
-    public void attachFileToChat(String attachType, String attachSource, String fileName) {
-        if (attachType.equals("picture")) { // типы аттачей можно вынести в отдельный Enum или вспомогательный класс
-            if (attachSource.equals("local")) {
+    public void attachFileToChat(MessageAttachType attachType, MessageAttachSource attachSource,
+                                 String fileNameOrDescription) {
+        if (attachType.equals(MessageAttachType.PICTURE)) {
+            if (attachSource.equals(MessageAttachSource.LOCAL)) {
 
             } else {
-
+                attachFirstPictureToChatFromVKCollection(fileNameOrDescription);
             }
             return;
         }
-        if (attachType.equals("audio")) {
-            if (attachSource.equals("local")) {
+        if (attachType.equals(MessageAttachType.AUDIO)) {
+            if (attachSource.equals(MessageAttachSource.LOCAL)) {
 
             } else {
-                attachAudioToChatFromVKCollection(fileName);
+                attachAudioToChatFromVKCollection(fileNameOrDescription);
             }
             return;
         }
-        if (attachType.equals("video")) {
-            if (attachSource.equals("local")) {
+        if (attachType.equals(MessageAttachType.VIDEO)) {
+            if (attachSource.equals(MessageAttachSource.LOCAL)) {
 
             } else {
-                attachVideoToChatFromVKCollection(fileName);
+                attachVideoToChatFromVKCollection(fileNameOrDescription);
             }
         }
     }
@@ -136,8 +146,14 @@ public class MessengerSteps {
 
     }
 
-    public void attachPictureToChatFromVKCollection(String fileLocalPath) {
-
+    // под самый конец реализации метода я заметил что в коллекции картинок нет ИМЕН!  (O_o)
+    // Это был большой сюрприз. Поэтому этот метод забирает просто первый элемент из тестовой
+    // коллекции. Но надо переделать. За неимением времени на переделки - отсылаю так.
+    public void attachFirstPictureToChatFromVKCollection(String fileNameIgnored) {
+        messengerPage.attachFileFromVKCollectionButton.shouldBe(visible).click();
+        messengerPage.attachPictureFromVKCollectionButton.shouldBe(visible).click();
+        messengerPage.pictureFileFirstInVKCollection.shouldBe(visible).click();
+        messengerPage.sendMessageInChatButton.shouldBe(visible).click();
     }
 
     MessengerPage messengerPage = new MessengerPage();

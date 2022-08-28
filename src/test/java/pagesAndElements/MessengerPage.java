@@ -13,13 +13,17 @@ public class MessengerPage {
             // но иначе будут длиннющие страшнющие локаторы. Пока так сделал. Но обсуждаемо.
             // Abstract тут - любой, не конкретно указанный элемент, как-правило это кастомизируемый элемент,
             // либо таких элементов много и этот элемент будет просто первым.
+            // TO_REPLACE как правило абстрактный элемент с привязкой по какому-либо атрибуту, который мы
+            // скармливаем статично-фабричному методу на переделку нужного нам локатора on-demand
             createNewChatButton = $x("//button[contains(@aria-label, 'Новый чат')]"),
             newChatNameInput = $x("//input[@id='im_dialogs_creation_name']"),
             chatNameInListAbstract = $x("//span[@class='_im_dialog_link']"),
             chatCreateButtonConfirm = $x("//button[contains(@class, 'im_confirm_creation')]"),
             currentActiveChatName = $x("//a[contains(@class, '_im_page_peer_name')]"),
             attachFileFromVKCollectionButton = $x("//a[contains(@class, 'ms_item_more')]"),
-            attachPhotoFromVKCollectionButton = $x("//a[contains(@class, 'type_photo')]"),
+            attachPictureFromVKCollectionButton = $x("//a[contains(@class, 'type_photo')]"),
+            pictureFileFirstInVKCollection = $x("//a[contains(@id, 'photos_choose_row')]"),
+            attachedPictureFileInChatAbstract = $x("//a[contains(@href, 'photo') and contains(@aria-label, 'TO_REPLACE')]"),
             attachAudioFromVKCollectionButton = $x("//a[contains(@class, 'type_audio')]"),
             attachedAudioFileInChatAbstract = $x("//*[contains(@class, 'audio_row__inner')]//a[contains(@href, 'TO_REPLACE')]"),
             audioFileInVkCollectionAbstract = $x("//a[contains(@class, 'artist_link') and contains(text(),'TO_REPLACE')]/ancestor::div//div[@class='ape_attach']"),
@@ -27,7 +31,7 @@ public class MessengerPage {
             attachedVideoFileInChatAbstract = $x("//div[contains(@class, 'a post_video_title') and contains(text(), 'TO_REPLACE')]"),
             videoFileInVkCollectionAbstract = $x("(//a[@class='video_item_title' and contains(text(), 'TO_REPLACE')]/ancestor::div[contains(@id, 'video_item')]/a)[1]"),
             sendMessageInChatButton = $x("//*[contains(@class, 'im-chat-input')]//*[contains(@class, 'im-send-btn__icon--send')]"),
-            chatMessageTimeLinkAbstract = $x("_im_mess_link");
+            chatMessageTimeLinkAbstract = $x("//a[@class='_im_mess_link']");
 
     public ElementsCollection
             chatNameInListCollection = $$x("//span[@class='_im_dialog_link']"),
