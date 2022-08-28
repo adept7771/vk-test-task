@@ -1,5 +1,6 @@
 package testData;
 
+import common.Tools;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.xml.XmlTest;
@@ -29,11 +30,9 @@ public class TestDataChecker {
                 }
             }
         });
-
-        if(dataToCheck.isEmpty()){
+        if (dataToCheck.isEmpty()) {
             return;
-        }
-        else {
+        } else {
             LoginSteps loginSteps = new LoginSteps();
             loginSteps.login(Users.user1Login, Users.user1pass);
         }
@@ -44,45 +43,23 @@ public class TestDataChecker {
             String attachType = testParams.getOrDefault("attachType", null);
             String attachSource = testParams.getOrDefault("attachSource", null);
             String attachFileName = testParams.getOrDefault("attachFileNameOrDescription", null);
-            if(attachType == null || attachSource == null || attachFileName == null){
+            if (attachType == null || attachSource == null || attachFileName == null) {
                 Assert.fail("Some of test parameters is null. Cant parse it. attachType " + attachType + " attachSource "
-                + attachSource + " attachFileName " + attachFileName);
+                        + attachSource + " attachFileName " + attachFileName);
             }
-            if(attachType.equals(MessageAttachType.PICTURE.name())){
+            if (attachType.equals(MessageAttachType.PICTURE.name())) {
                 commonSteps.openPhotos();
                 PhotosSteps photosSteps = new PhotosSteps();
                 photosSteps.checkPhotoIsExistInAlbums(attachFileName);
-            }
-            else if(attachType.equals(MessageAttachType.AUDIO.name())){
+            } else if (attachType.equals(MessageAttachType.AUDIO.name())) {
                 commonSteps.openMusic();
                 MusicSteps musicSteps = new MusicSteps();
                 musicSteps.checkAudioIsExistInMyAlbum(attachFileName);
-            }
-            else{
+            } else {
                 commonSteps.openVideos();
                 VideoSteps videoSteps = new VideoSteps();
                 videoSteps.checkVideoIsExistInMyAlbum(attachFileName);
             }
-
         });
-//
-//        testDataToCheck.forEach((attachType, attachSource) -> {
-//            commonSteps.openSite();
-//            if(attachType.equals(MessageAttachType.PICTURE.name())){
-//                commonSteps.openPhotos();
-//                PhotosSteps photosSteps = new PhotosSteps();
-//                photosSteps.checkPhotoIsExistInAlbums("test");
-//            }
-//            else if(attachType.equals(MessageAttachType.AUDIO.name())){
-//                commonSteps.openMusic();
-//                MusicSteps musicSteps = new MusicSteps();
-//                musicSteps.checkAudioIsExistInMyAlbum("test");
-//            }
-//            else{
-//                commonSteps.openVideos();
-//                VideoSteps videoSteps = new VideoSteps();
-//                videoSteps.checkVideoIsExistInMyAlbum("test");
-//            }
-//        });
     }
 }

@@ -19,67 +19,9 @@ public class Tools {
 
     private static Logger log = LogManager.getLogger(Tools.class);
 
-//    /**
-//     * Получает значение системной переменной (настройку) или возвращает пустую строку
-//     *
-//     * @param variableName - имя переменной
-//     * @return - возвращается в виде строки
-//     */
-//    public static String getSystemVariableValue(String variableName) {
-//        String variableValue = System.getProperty(variableName);
-//        if (Properties.showStartupLogs.val.equals("true")) {
-//            log.info("Системная переменная " + variableName + " имеет значение: " + variableValue);
-//        }
-//        return variableValue == null ? "" : variableValue;
-//    }
-//
-//    public static DesiredCapabilities getCapabilityFromSystemOrProps
-//            (DesiredCapabilities capabilities, String capabilityName){
-//
-//        if (Tools.getSystemVariableValue(capabilityName).isEmpty()) {
-//            if (!Properties.valueOf(capabilityName).val.isEmpty()) {
-//                if (Properties.showStartupLogs.val.equals("true")) {
-//                    log.info("Capability: " + capabilityName + " получили настройку из файла настроек: " +
-//                            Properties.valueOf(capabilityName).val);
-//                }
-//                capabilities.setCapability(capabilityName,
-//                        Boolean.valueOf(Properties.valueOf(capabilityName).val));
-//                return capabilities;
-//            }
-//        }
-//        else {
-//            if (Properties.showStartupLogs.val.equals("true")) {
-//                log.info("Для capability: " + capabilityName + " устанавливается системное значение.");
-//            }
-//            capabilities.setCapability(capabilityName,
-//                    Boolean.valueOf(Tools.getSystemVariableValue(capabilityName)));
-//            return capabilities;
-//        }
-//        return capabilities;
-//    }
-//
-//    public static String getRunOptionFromSystemOrProps(String optionName){
-//        String optionValueFromSystem = getSystemVariableValue(optionName);
-//        if(optionValueFromSystem.isEmpty()) {
-//            if (!Properties.valueOf(optionName).val.isEmpty()) {
-//                if (Properties.showStartupLogs.val.equals("true")) {
-//                    log.info("Опция " + optionName + " получает настройку из файла настроек: " +
-//                            Properties.valueOf(optionName).val);
-//                }
-//                return Properties.valueOf(optionName).val;
-//            }
-//        }
-//        else {
-//            if (Properties.showStartupLogs.val.equals("true")) {
-//                log.info("Для опции " + optionName + " устанавливается сиистемное значение.");
-//            }
-//            return getSystemVariableValue(optionName);
-//        }
-//        return "";
-//    }
-
     public static String getSystemMonthInMMMFormat() {
-        return new SimpleDateFormat("MMM", Locale.ENGLISH).format(Calendar.getInstance().getTime());
+        return new SimpleDateFormat("MMM", Locale.ENGLISH)
+                .format(Calendar.getInstance().getTime());
     }
 
     public static String getSystemDateIn_dd_MMM_yyyy() {

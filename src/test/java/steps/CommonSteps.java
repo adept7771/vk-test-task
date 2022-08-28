@@ -1,12 +1,9 @@
 package steps;
 
 import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.BeforeAll;
-import org.testng.ITestContext;
-import org.testng.ITestNGListener;
-import org.testng.annotations.BeforeTest;
+import common.Tools;
+import core.Configurator;
 import pagesAndElements.LeftMenuGlobal;
-import pagesAndElements.LoginPage;
 import testData.Settings;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -14,7 +11,8 @@ import static com.codeborne.selenide.Condition.visible;
 public class CommonSteps {
 
     public void openSite() { // Не захотел этот метод в before аннотациях реализовывать. Но можно и там.
-        Selenide.open(Settings.testAddress);
+        Selenide.open(Configurator.getSetting(Settings.testAddress.name()));
+        Tools.moveWindowToDimension(0, 0);
     }
 
     public void openMessenger() {
