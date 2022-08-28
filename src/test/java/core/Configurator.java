@@ -3,14 +3,11 @@ package core;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestNGListener;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import testData.DataChecker;
+import testData.TestDataChecker;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
@@ -23,7 +20,8 @@ public class Configurator implements ITestNGListener {
     public void setUp(ITestContext iTestContext) {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true)
                 .savePageSource(true));
-        new DataChecker().checkAttachmentsInVkIsExist(iTestContext);
+        new TestDataChecker().checkAttachmentsInVkIsExist(iTestContext);
+        System.out.println();
 //        recognizeFrameworkSettings();
     }
 

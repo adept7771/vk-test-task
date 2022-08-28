@@ -7,13 +7,14 @@ import org.testng.ITestNGListener;
 import org.testng.annotations.BeforeTest;
 import pagesAndElements.LeftMenuGlobal;
 import pagesAndElements.LoginPage;
+import testData.Settings;
 
 import static com.codeborne.selenide.Condition.visible;
 
 public class CommonSteps {
 
     public void openSite() { // Не захотел этот метод в before аннотациях реализовывать. Но можно и там.
-        Selenide.open("https://vk.com");
+        Selenide.open(Settings.testAddress);
     }
 
     public void openMessenger() {
