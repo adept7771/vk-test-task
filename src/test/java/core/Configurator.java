@@ -23,8 +23,7 @@ public class Configurator implements ITestNGListener {
     public void setUp(ITestContext iTestContext) {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true)
                 .savePageSource(true));
-        DataChecker dataChecker = new DataChecker();
-        dataChecker.checkAttachmentsInVkIsExist(iTestContext);
+        new DataChecker().checkAttachmentsInVkIsExist(iTestContext);
 //        recognizeFrameworkSettings();
     }
 

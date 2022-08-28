@@ -36,14 +36,14 @@
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name = "test5">-->
-<!--        <parameter name = "attachType" value="VIDEO"/>-->
-<!--        <parameter name = "attachSource" value="VK"/>-->
-<!--        <parameter name = "attachFileNameOrDescription" value="test"/>-->
-<!--        <classes>-->
-<!--            <class name = "tests.AttachTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name = "test5">
+        <parameter name = "attachType" value="VIDEO"/>
+        <parameter name = "attachSource" value="VK"/>
+        <parameter name = "attachFileNameOrDescription" value="test"/>
+        <classes>
+            <class name = "tests.AttachTest" />
+        </classes>
+    </test>
 <!--    <test name = "test6">-->
 <!--        <parameter name = "attachType" value="VIDEO"/>-->
 <!--        <parameter name = "attachSource" value="LOCAL"/>-->
