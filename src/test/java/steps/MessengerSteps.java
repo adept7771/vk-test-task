@@ -5,6 +5,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.ex.ElementShould;
 import common.Tools;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import pagesAndElements.MessengerPage;
 import testData.additionalClasses.MessageAttachSource;
@@ -16,6 +17,7 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class MessengerSteps {
 
+    @Step("Шаг - создание нового чата с именем {0}")
     public void createNewChat(String chatName) {
         commonSteps.openMessenger();
         messengerPage.chatNameInListAbstract.shouldBe(visible);
@@ -33,6 +35,7 @@ public class MessengerSteps {
         messengerPage.chatNameInListAbstract.shouldBe(visible);
     }
 
+    @Step("Шаг - чат существует в списке чатов с именем {0}")
     public void checkChatExistInChatList(String chatName) {
         messengerPage.chatNameInListAbstract.shouldBe(visible);
         messengerPage.chatNameInListCollection.shouldBe(
@@ -41,11 +44,13 @@ public class MessengerSteps {
                 CollectionCondition.itemWithText(chatName));
     }
 
+    @Step("Шаг - текущий чат пуст")
     public void checkCurrentChatIsClean() {
         messengerPage.chatMessageTimeLinkAbstract.shouldBe(
                 Condition.not(visible), Duration.ofSeconds(500));
     }
 
+    @Step("Шаг - открыть чат по имени {0}")
     public void openChatWithName(String chatName) {
         messengerPage.chatNameInListAbstract.shouldBe(visible);
         messengerPage.chatNameInListCollection.shouldBe(
@@ -57,6 +62,7 @@ public class MessengerSteps {
                 .shouldBe(Condition.exactText(chatName));
     }
 
+    @Step("Шаг - подтвердить что файл типа {0} и именем {1} есть в текущем чате")
     public void assertFileExistInChat(MessageAttachType attachType, String fileNameOrDescription) {
         // по-хорошему и для полноты проверки надо бы выкачать еще файл, и сравнить
         // размеры с размерами тех файлов, что лежат в библиотеке VK пока проверка не полная (по верстке)
@@ -86,7 +92,7 @@ public class MessengerSteps {
             Assert.assertTrue(pictureFileInChatElement.isDisplayed());
         }
     }
-
+    @Step("Шаг - прикрепить файл типа {0} из {1} и именем {2} к текущему чату")
     public void attachFileToChat(MessageAttachType attachType, MessageAttachSource attachSource,
                                  String fileNameOrDescription) {
         if (attachType.equals(MessageAttachType.PICTURE)) {

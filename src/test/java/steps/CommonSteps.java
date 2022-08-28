@@ -3,13 +3,15 @@ package steps;
 import com.codeborne.selenide.Selenide;
 import common.Tools;
 import core.Configurator;
+import io.qameta.allure.Step;
 import pagesAndElements.LeftMenuGlobal;
-import testData.Settings;
+import common.Settings;
 
 import static com.codeborne.selenide.Condition.visible;
 
 public class CommonSteps {
 
+    @Step("Шаг - открытие сайта")
     public void openSite() { // Не захотел этот метод в before аннотациях реализовывать. Но можно и там.
         Selenide.open(Configurator.getSetting(Settings.testAddress.name()));
         Tools.moveWindowToDimension(0, 0);

@@ -3,6 +3,7 @@ package tests;
 import common.Generator;
 import core.Configurator;
 import core.RetryAnalyzer;
+import io.qameta.allure.*;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import steps.CommonSteps;
@@ -17,7 +18,11 @@ public class AttachTest extends Configurator {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     @Parameters({"attachType", "attachSource", "attachFileNameOrDescription"}) // немножко параметризации
-    public void dummyAttachTest(MessageAttachType attachType, MessageAttachSource attachSource,
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("Прикрепление файлов")
+    @Story("Мессенджер")
+    @Owner("Dmitry Potapov")
+    public void attachFilesToChatTest(MessageAttachType attachType, MessageAttachSource attachSource,
                                 String attachFileNameOrDescription){
         loginSteps.login(Users.user1Login, Users.user1pass);
         String chatName = Generator.latinString(30);

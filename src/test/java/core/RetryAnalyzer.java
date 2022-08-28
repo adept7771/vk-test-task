@@ -1,9 +1,8 @@
 package core;
 
-import common.Tools;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
-import testData.Settings;
+import common.Settings;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
 
