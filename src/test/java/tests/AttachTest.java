@@ -2,6 +2,7 @@ package tests;
 
 import common.Generator;
 import core.Configurator;
+import core.RetryAnalyzer;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import steps.CommonSteps;
@@ -14,7 +15,7 @@ import testData.additionalClasses.MessageAttachType;
 
 public class AttachTest extends Configurator {
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     @Parameters({"attachType", "attachSource", "attachFileNameOrDescription"}) // немножко параметризации
     public void dummyAttachTest(MessageAttachType attachType, MessageAttachSource attachSource,
                                 String attachFileNameOrDescription){

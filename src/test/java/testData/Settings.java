@@ -9,10 +9,11 @@ public enum Settings {
     // стороннее типа Owner.
 
     testAddress("https://vk.com"),
-    needToCheckTestData("true"), // проверять ли тестовые данные перед запуском?
+    needToCheckTestData("false"), // проверять ли тестовые данные перед запуском?
     timeToWaitElementMS("3000"),
     browser("chrome"), // браузер по умолчанию chrome, firefox, opera
-    startMaximized("true"); // true false
+    retryAttemptsIfTestFailed("2"), // сколько раз перезапускать тест, если он свалился
+    startMaximized("true"); // true false запускать ли окно на весь экран
 
     public String val;
 
