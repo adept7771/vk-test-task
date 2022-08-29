@@ -17,21 +17,22 @@ import testData.additionalClasses.MessageAttachType;
 public class AttachTest extends Configurator {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    @Parameters({"attachType", "attachSource", "attachFileNameOrDescription"}) // немножко параметризации
+    @Parameters({"attachType", "attachSource", "attachFileNameOrPath"}) // немножко параметризации
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Прикрепление файлов")
     @Story("Мессенджер")
     @Owner("Dmitry Potapov")
     public void attachFilesToChatTest(MessageAttachType attachType, MessageAttachSource attachSource,
-                                String attachFileNameOrDescription){
+                                String attachFileNameOrPath
+    ){
         loginSteps.login(Users.user1Login, Users.user1pass);
         String chatName = Generator.latinString(30);
         messengerSteps.createNewChat(chatName);
         messengerSteps.checkChatExistInChatList(chatName); // можно все эти шаги по созданию чата так же
         messengerSteps.openChatWithName(chatName); // объединить в бОльшую цепочку действий
         messengerSteps.checkCurrentChatIsClean();
-        messengerSteps.attachFileToChat(attachType, attachSource, attachFileNameOrDescription);
-        messengerSteps.assertFileExistInChat(attachType, attachFileNameOrDescription);
+        messengerSteps.attachFileToChat(attachType, attachSource, attachFileNameOrPath);
+        messengerSteps.assertFileExistInChat(attachType, attachFileNameOrPath);
     }
 
     MessengerSteps messengerSteps = new MessengerSteps();

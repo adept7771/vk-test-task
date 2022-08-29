@@ -22,7 +22,7 @@ public class LoginSteps {
         // капчу данному юзеру надо отключать перед тестами. Вот такое время ожидание ввел чтоб
         // капчу успеть ввести. Но такой вариант не годится в прод. Пока костыль-вариант лишь бы показать
         // общую работу кода.
-        vkIdPage.passwordInput.shouldBe(visible, Duration.ofMillis(10000)).val(password);
+        vkIdPage.passwordInput.shouldBe(visible, Duration.ofMillis(25000)).val(password);
         vkIdPage.continueLoginButton.shouldBe(visible).click();
         leftMenuGlobal.blogLink.shouldBe(visible);
     }
