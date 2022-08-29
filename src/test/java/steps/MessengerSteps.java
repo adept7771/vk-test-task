@@ -94,12 +94,12 @@ public class MessengerSteps {
     }
     @Step("Шаг - прикрепить файл типа {0} из {1} и именем {2} к текущему чату")
     public void attachFileToChat(MessageAttachType attachType, MessageAttachSource attachSource,
-                                 String fileNameOrDescription) {
+                                 String fileNameOrPath) {
         if (attachType.equals(MessageAttachType.PICTURE)) {
             if (attachSource.equals(MessageAttachSource.LOCAL)) {
-
+                attachLocalPictureToChat(fileNameOrPath);
             } else {
-                attachFirstPictureToChatFromVKCollection(fileNameOrDescription);
+                attachPictureToChatFromVKCollection(fileNameOrPath);
             }
             return;
         }
@@ -107,7 +107,7 @@ public class MessengerSteps {
             if (attachSource.equals(MessageAttachSource.LOCAL)) {
 
             } else {
-                attachAudioToChatFromVKCollection(fileNameOrDescription);
+                attachAudioToChatFromVKCollection(fileNameOrPath);
             }
             return;
         }
@@ -115,7 +115,7 @@ public class MessengerSteps {
             if (attachSource.equals(MessageAttachSource.LOCAL)) {
 
             } else {
-                attachVideoToChatFromVKCollection(fileNameOrDescription);
+                attachVideoToChatFromVKCollection(fileNameOrPath);
             }
         }
     }
@@ -152,10 +152,7 @@ public class MessengerSteps {
 
     }
 
-    // под самый конец реализации метода я заметил что в коллекции картинок нет ИМЕН!  (O_o)
-    // Это был большой сюрприз. Поэтому этот метод забирает просто первый элемент из тестовой
-    // коллекции. Но надо переделать. За неимением времени на переделки - отсылаю так.
-    public void attachFirstPictureToChatFromVKCollection(String fileNameIgnored) {
+    public void attachPictureToChatFromVKCollection(String fileNameIgnored) {
         messengerPage.attachFileFromVKCollectionButton.shouldBe(visible).click();
         messengerPage.attachPictureFromVKCollectionButton.shouldBe(visible).click();
         messengerPage.pictureFileFirstInVKCollection.shouldBe(visible).click();

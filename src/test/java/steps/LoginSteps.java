@@ -5,6 +5,8 @@ import pagesAndElements.LeftMenuGlobal;
 import pagesAndElements.VkIdPage;
 import pagesAndElements.LoginPage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 
 public class LoginSteps {
@@ -16,7 +18,11 @@ public class LoginSteps {
         commonSteps.openSite();
         loginPage.phoneOrEmailInput.shouldBe(visible).val(userName);
         loginPage.enterButton.shouldBe(visible).click();
-        vkIdPage.passwordInput.shouldBe(visible).val(password);
+        // В последнее время здесь капча мерзкая вываливается. Приходится вручную вводить.
+        // капчу данному юзеру надо отключать перед тестами. Вот такое время ожидание ввел чтоб
+        // капчу успеть ввести. Но такой вариант не годится в прод. Пока костыль-вариант лишь бы показать
+        // общую работу кода.
+        vkIdPage.passwordInput.shouldBe(visible, Duration.ofMillis(10000)).val(password);
         vkIdPage.continueLoginButton.shouldBe(visible).click();
         leftMenuGlobal.blogLink.shouldBe(visible);
     }
