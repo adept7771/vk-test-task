@@ -31,7 +31,10 @@ public class MessengerPage {
             attachedVideoFileInChatAbstract = $x("//div[contains(@class, 'a post_video_title') and contains(text(), 'TO_REPLACE')]"),
             videoFileInVkCollectionAbstract = $x("(//a[@class='video_item_title' and contains(text(), 'TO_REPLACE')]/ancestor::div[contains(@id, 'video_item')]/a)[1]"),
             sendMessageInChatButton = $x("//*[contains(@class, 'im-chat-input')]//*[contains(@class, 'im-send-btn__icon--send')]"),
-            chatMessageTimeLinkAbstract = $x("//a[@class='_im_mess_link']");
+            chatMessageTimeLinkAbstract = $x("//a[@class='_im_mess_link']"),
+            chatMessagePictureAbstract = $x("//div[contains(@class, '_im_msg_media')]"),
+            chatMessagePictureFullScreen = $x("//div[@id='pv_photo']/img"),
+            chatMessageAttachPhotoOrVideoInputHidden = $x("//input[@class='im-chat-input--attach-file']");
 
     public ElementsCollection
             chatNameInListCollection = $$x("//span[@class='_im_dialog_link']"),
