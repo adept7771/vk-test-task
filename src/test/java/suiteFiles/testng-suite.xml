@@ -6,15 +6,15 @@
     <listeners>
         <listener class-name="core.Configurator" />
     </listeners>
-<!--        <test name = "test1 Attach PICTURE From VK Collection">-->
-<!--            <parameter name = "attachType" value="PICTURE"/>-->
-<!--            <parameter name = "attachSource" value="VK"/>-->
-<!--            <parameter name = "attachFileNameOrPath" value="test"/>-->
-<!--            <classes>-->
-<!--                <class name = "tests.AttachTest" />-->
-<!--            </classes>-->
-<!--        </test>-->
-    <test name = "test1 Attach PICTURE From local Collection">
+        <test name = "Attach PICTURE From VK Collection">
+            <parameter name = "attachType" value="PICTURE"/>
+            <parameter name = "attachSource" value="VK"/>
+            <parameter name = "attachFileNameOrPath" value="test"/>
+            <classes>
+                <class name = "tests.AttachTest" />
+            </classes>
+        </test>
+    <test name = "Attach PICTURE From LOCAL files">
         <parameter name = "attachType" value="PICTURE"/>
         <parameter name = "attachSource" value="LOCAL"/>
     <parameter name = "attachFileNameOrPath" value="/Users/devnull/IdeaProjects/Experiments/vk-test-task/src/test/java/testData/filesToUpload/test.jpeg"/>
@@ -22,34 +22,36 @@
             <class name = "tests.AttachTest" />
         </classes>
     </test>
-<!--    <test name = "test1 Attach AUDIO From VK Collection">-->
-<!--        <parameter name = "attachType" value="AUDIO"/>-->
-<!--        <parameter name = "attachSource" value="VK"/>-->
-<!--        <parameter name = "attachFileNameOrPath" value="test"/>-->
-<!--        <classes>-->
-<!--            <class name = "tests.AttachTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name = "test4">-->
+    <test name = "Attach AUDIO From VK Collection">
+        <parameter name = "attachType" value="AUDIO"/>
+        <parameter name = "attachSource" value="VK"/>
+        <parameter name = "attachFileNameOrPath" value="test"/>
+        <classes>
+            <class name = "tests.AttachTest" />
+        </classes>
+    </test>
+<!--    <test name = "Attach AUDIO From LOCAL files">-->
 <!--        <parameter name = "attachType" value="AUDIO"/>-->
 <!--        <parameter name = "attachSource" value="LOCAL"/>-->
+<!--        <parameter name = "attachFileNameOrPath" value="/Users/devnull/IdeaProjects/Experiments/vk-test-task/src/test/java/testData/filesToUpload/test.mp3"/>-->
 <!--        <classes>-->
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
-<!--    <test name = "test5">-->
-<!--        <parameter name = "attachType" value="VIDEO"/>-->
-<!--        <parameter name = "attachSource" value="VK"/>-->
-<!--        <parameter name = "attachFileNameOrPath" value="test"/>-->
-<!--        <classes>-->
-<!--            <class name = "tests.AttachTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name = "test6">-->
-<!--        <parameter name = "attachType" value="VIDEO"/>-->
-<!--        <parameter name = "attachSource" value="LOCAL"/>-->
-<!--        <classes>-->
-<!--            <class name = "tests.AttachTest" />-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name = "Attach VIDEO From VK Collection">
+        <parameter name = "attachType" value="VIDEO"/>
+        <parameter name = "attachSource" value="VK"/>
+        <parameter name = "attachFileNameOrPath" value="test"/>
+        <classes>
+            <class name = "tests.AttachTest" />
+        </classes>
+    </test>
+    <test name = "Attach VIDEO From LOCAL Collection">
+        <parameter name = "attachType" value="VIDEO"/>
+        <parameter name = "attachSource" value="LOCAL"/>
+        <parameter name = "attachFileNameOrPath" value="/Users/devnull/IdeaProjects/Experiments/vk-test-task/src/test/java/testData/filesToUpload/test.mov"/>
+        <classes>
+            <class name = "tests.AttachTest" />
+        </classes>
+    </test>
 </suite>

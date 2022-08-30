@@ -7,7 +7,6 @@ import com.codeborne.selenide.ex.ElementShould;
 import common.Settings;
 import common.Tools;
 import io.qameta.allure.Step;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 import pagesAndElements.MessengerPage;
 import testData.additionalClasses.MessageAttachSource;
@@ -86,30 +85,41 @@ public class MessengerSteps {
             return;
         }
         if (attachType.equals(MessageAttachType.VIDEO)) {
-            messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
-            SelenideElement audioFileInChatElement = Tools.replaceTextInLocator(
-                    messengerPage.attachedVideoFileInChatAbstract,
-                    "TO_REPLACE", fileNameOrPath).shouldBe(visible);
-            Assert.assertTrue(audioFileInChatElement.isDisplayed());
+            if(attachSource.equals(MessageAttachSource.LOCAL)){
+                messengerPage.chatMessageVideoWrapper.shouldBe(visible);
+                // Проверка так же не полная. Просто смотрим что появился видео враппер. Надо думать так же
+                // как сравнивать два видео файла.
+                Assert.assertTrue(messengerPage.chatMessageVideoWrapper.isDisplayed());
+            }
+            else {
+                messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
+                SelenideElement audioFileInChatElement = Tools.replaceTextInLocator(
+                        messengerPage.attachedVideoFileInChatAbstract,
+                        "TO_REPLACE", fileNameOrPath).shouldBe(visible);
+                Assert.assertTrue(audioFileInChatElement.isDisplayed());
+            }
+
             return;
         }
         if (attachType.equals(MessageAttachType.PICTURE)) {
             if (attachSource.equals(MessageAttachSource.LOCAL)) {
                 messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
                 downloadLastPictureInChatAs("test");
+
                 Assert.assertTrue(commonSteps.compareTwoFilesUsingFileSize(
                                 Settings.pathWithDownloadedTmpFiles.val + "test.jpeg",
                                 Settings.pathWithOriginalFilesToUpload.val + "test.jpeg",
                                 Double.parseDouble(Settings.diffSizePercentageToCompareImages.val)),
                         "Pictures is bigger by size then defined system trash hold");
+
                 Assert.assertTrue(commonSteps.compareTwoPicturesViaDimensions(
                         Settings.pathWithDownloadedTmpFiles.val + "test.jpeg",
                         Settings.pathWithOriginalFilesToUpload.val + "test.jpeg"));
             } else {
                 messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
                 SelenideElement pictureFileInChatElement = Tools.replaceTextInLocator(
-                        messengerPage.attachedPictureFileInChatAbstract,
-                        "TO_REPLACE", fileNameOrPath).shouldBe(visible);
+                        messengerPage.attachedPictureFileInChatAbstract, "TO_REPLACE",
+                        fileNameOrPath).shouldBe(visible);
                 Assert.assertTrue(pictureFileInChatElement.isDisplayed());
             }
         }
@@ -136,7 +146,7 @@ public class MessengerSteps {
         }
         if (attachType.equals(MessageAttachType.VIDEO)) {
             if (attachSource.equals(MessageAttachSource.LOCAL)) {
-
+                attachLocalVideoToChat(fileNameOrPath);
             } else {
                 attachVideoToChatFromVKCollection(fileNameOrPath);
             }
@@ -146,7 +156,8 @@ public class MessengerSteps {
     public void downloadLastPictureInChatAs(String downloadPictureName) {
         messengerPage.chatMessagePictureAbstract.shouldBe(visible).click();
         try {
-            messengerPage.chatMessagePictureFullScreen.shouldBe(visible).click();
+            messengerPage.chatMessagePictureFullScreen.shouldBe(
+                    visible, Duration.ofMillis(1100)).click();
         } catch (ElementShould elementShould) { // иногда не прожимается, приходится дублировать
             messengerPage.chatMessagePictureFullScreen.shouldBe(visible).click();
         }
@@ -182,7 +193,11 @@ public class MessengerSteps {
     }
 
     public void attachLocalVideoToChat(String fileLocalPath) {
-
+        messengerPage.chatMessageAttachPhotoOrVideoInputHidden.shouldBe(exist)
+                .uploadFile(new File(fileLocalPath));
+        messengerPage.chatMessageVideoSendPreview.shouldBe(
+                visible,Duration.ofSeconds(10));
+        messengerPage.sendMessageInChatButton.shouldBe(visible).click();
     }
 
     public void attachVideoToChatFromVKCollection(String nameInCollection) {

@@ -34,6 +34,8 @@ public class MessengerPage {
             chatMessageTimeLinkAbstract = $x("//a[@class='_im_mess_link']"),
             chatMessagePictureAbstract = $x("//div[contains(@class, '_im_msg_media')]"),
             chatMessagePictureFullScreen = $x("//div[@id='pv_photo']/img"),
+            chatMessageVideoSendPreview = $x("//div[@class='VideoPreview__thumb']"),
+            chatMessageVideoWrapper = $x("//div[@class='inline_video_wrap']"),
             chatMessageAttachPhotoOrVideoInputHidden = $x("//input[@class='im-chat-input--attach-file']");
 
     public ElementsCollection
