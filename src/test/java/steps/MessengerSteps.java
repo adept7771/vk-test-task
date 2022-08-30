@@ -7,6 +7,7 @@ import com.codeborne.selenide.ex.ElementShould;
 import common.Settings;
 import common.Tools;
 import io.qameta.allure.Step;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 import pagesAndElements.MessengerPage;
 import testData.additionalClasses.MessageAttachSource;
@@ -69,8 +70,9 @@ public class MessengerSteps {
                 .shouldBe(Condition.exactText(chatName));
     }
 
-    @Step("Шаг - подтвердить что файл типа {0} и именем {1} есть в текущем чате")
-    public void assertFileExistInChat(MessageAttachType attachType, String fileNameOrPath) {
+    @Step("Шаг - подтвердить что файл типа {0} и именем {1} из источника {2} есть в текущем чате")
+    public void assertFileExistInChat(MessageAttachType attachType, String fileNameOrPath,
+                                      MessageAttachSource attachSource) {
         // по-хорошему и для полноты проверки надо бы выкачать еще файл, и сравнить
         // размеры с размерами тех файлов, что лежат в библиотеке VK пока проверка не полная (по верстке)
         if (attachType.equals(MessageAttachType.AUDIO)) {
@@ -92,7 +94,7 @@ public class MessengerSteps {
             return;
         }
         if (attachType.equals(MessageAttachType.PICTURE)) {
-            if (fileNameOrPath.contains("/")) {
+            if (attachSource.equals(MessageAttachSource.LOCAL)) {
                 messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
                 downloadLastPictureInChatAs("test");
                 Assert.assertTrue(commonSteps.compareTwoFilesUsingFileSize(
@@ -100,6 +102,9 @@ public class MessengerSteps {
                                 Settings.pathWithOriginalFilesToUpload.val + "test.jpeg",
                                 Double.parseDouble(Settings.diffSizePercentageToCompareImages.val)),
                         "Pictures is bigger by size then defined system trash hold");
+                Assert.assertTrue(commonSteps.compareTwoPicturesViaDimensions(
+                        Settings.pathWithDownloadedTmpFiles.val + "test.jpeg",
+                        Settings.pathWithOriginalFilesToUpload.val + "test.jpeg"));
             } else {
                 messengerPage.chatMessageTimeLinkAbstract.shouldBe(visible);
                 SelenideElement pictureFileInChatElement = Tools.replaceTextInLocator(
@@ -140,7 +145,11 @@ public class MessengerSteps {
 
     public void downloadLastPictureInChatAs(String downloadPictureName) {
         messengerPage.chatMessagePictureAbstract.shouldBe(visible).click();
-        messengerPage.chatMessagePictureFullScreen.shouldBe(visible).click();
+        try {
+            messengerPage.chatMessagePictureFullScreen.shouldBe(visible).click();
+        } catch (ElementShould elementShould) { // иногда не прожимается, приходится дублировать
+            messengerPage.chatMessagePictureFullScreen.shouldBe(visible).click();
+        }
         String pictureAddress = messengerPage.chatMessagePictureFullScreen.getAttribute("src");
         BufferedImage bufferedImage = null;
         try {

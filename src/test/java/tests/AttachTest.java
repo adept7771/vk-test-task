@@ -32,7 +32,7 @@ public class AttachTest extends Configurator {
         messengerSteps.openChatWithName(chatName); // объединить в бОльшую цепочку действий
         messengerSteps.checkCurrentChatIsClean();
         messengerSteps.attachFileToChat(attachType, attachSource, attachFileNameOrPath);
-        messengerSteps.assertFileExistInChat(attachType, attachFileNameOrPath);
+        messengerSteps.assertFileExistInChat(attachType, attachFileNameOrPath, attachSource);
     }
 
     MessengerSteps messengerSteps = new MessengerSteps();

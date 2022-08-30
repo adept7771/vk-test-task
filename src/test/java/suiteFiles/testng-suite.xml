@@ -6,15 +6,15 @@
     <listeners>
         <listener class-name="core.Configurator" />
     </listeners>
-        <test name = "test1 Attach PICTURE From VK Collection">
-            <parameter name = "attachType" value="PICTURE"/>
-            <parameter name = "attachSource" value="VK"/>
-            <parameter name = "attachFileNameOrPath" value="test"/>
-            <classes>
-                <class name = "tests.AttachTest" />
-            </classes>
-        </test>
-    <test name = "test1 Attach PICTURE From VK Collection">
+<!--        <test name = "test1 Attach PICTURE From VK Collection">-->
+<!--            <parameter name = "attachType" value="PICTURE"/>-->
+<!--            <parameter name = "attachSource" value="VK"/>-->
+<!--            <parameter name = "attachFileNameOrPath" value="test"/>-->
+<!--            <classes>-->
+<!--                <class name = "tests.AttachTest" />-->
+<!--            </classes>-->
+<!--        </test>-->
+    <test name = "test1 Attach PICTURE From local Collection">
         <parameter name = "attachType" value="PICTURE"/>
         <parameter name = "attachSource" value="LOCAL"/>
     <parameter name = "attachFileNameOrPath" value="/Users/devnull/IdeaProjects/Experiments/vk-test-task/src/test/java/testData/filesToUpload/test.jpeg"/>
@@ -22,14 +22,14 @@
             <class name = "tests.AttachTest" />
         </classes>
     </test>
-    <test name = "test1 Attach AUDIO From VK Collection">
-        <parameter name = "attachType" value="AUDIO"/>
-        <parameter name = "attachSource" value="VK"/>
-        <parameter name = "attachFileNameOrPath" value="test"/>
-        <classes>
-            <class name = "tests.AttachTest" />
-        </classes>
-    </test>
+<!--    <test name = "test1 Attach AUDIO From VK Collection">-->
+<!--        <parameter name = "attachType" value="AUDIO"/>-->
+<!--        <parameter name = "attachSource" value="VK"/>-->
+<!--        <parameter name = "attachFileNameOrPath" value="test"/>-->
+<!--        <classes>-->
+<!--            <class name = "tests.AttachTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
 <!--    <test name = "test4">-->
 <!--        <parameter name = "attachType" value="AUDIO"/>-->
 <!--        <parameter name = "attachSource" value="LOCAL"/>-->
@@ -37,14 +37,14 @@
 <!--            <class name = "tests.AttachTest" />-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name = "test5">
-        <parameter name = "attachType" value="VIDEO"/>
-        <parameter name = "attachSource" value="VK"/>
-        <parameter name = "attachFileNameOrPath" value="test"/>
-        <classes>
-            <class name = "tests.AttachTest" />
-        </classes>
-    </test>
+<!--    <test name = "test5">-->
+<!--        <parameter name = "attachType" value="VIDEO"/>-->
+<!--        <parameter name = "attachSource" value="VK"/>-->
+<!--        <parameter name = "attachFileNameOrPath" value="test"/>-->
+<!--        <classes>-->
+<!--            <class name = "tests.AttachTest" />-->
+<!--        </classes>-->
+<!--    </test>-->
 <!--    <test name = "test6">-->
 <!--        <parameter name = "attachType" value="VIDEO"/>-->
 <!--        <parameter name = "attachSource" value="LOCAL"/>-->
